@@ -79,7 +79,7 @@ Cocoa 是 Mac OS X 上主要的应用程序框架之一。它由一组 Objective
 	```
 
 ###命名首字母大写，其他命名首字母小写。并且采用驼峰格式分割单词。
-例如：```QQTest```
+例如：```BWTest```
 
 ###使用能够读出来的名称
 人类长于记忆和使用单词。大脑中的相当一部分就是用来容纳和处理单词的。单词如果能够读的出来，则非常方便我们阅读和理解。
@@ -141,11 +141,11 @@ NSSstring+Utils.h
 
 以下是一些常用的首字母缩略词：```ASCII,PDF,XML,HTML,URL,RTF,HTTP,TIFF,JPG,PNG,GIF,LZW,ROM,RGB,CMYK,MIDI,FTP...```
 
-###宏定义全部字母大写，例如:```#define QQ_DEBUG 1```
+###宏定义全部字母大写，例如:```#define BW_DEBUG 1```
 ###常量定义，字符串定义以小写字母```k```开头，随后首字母大写
 
 ```
-static NSString* const kQQBarTitle = @"动态";
+static NSString* const kBWBarTitle = @"动态";
 ```
 
 ###如果要定义常量使用static const优于宏定义，前者会进行类型检查
@@ -176,13 +176,13 @@ static NSString* const kQQBarTitle = @"动态";
 反例例如：
 
 ```
-_needLogoutAccount = [[[[QQAppSetting GetInstance] appSetting] valueForKey:NeedLogoutAccounts] retain];
+_needLogoutAccount = [[[[BWAppSetting GetInstance] appSetting] valueForKey:NeedLogoutAccounts] retain];
 ```
 考虑如果改成下述模样，是不是可读性一下子提高了很多：
 
 ```
-QQAppSetting* shareSetting = [QQAppSetting GetInstance];
-QQLockDictionary* defaultSettings = [shareSetting appSetting];
+BWAppSetting* shareSetting = [BWAppSetting GetInstance];
+BWLockDictionary* defaultSettings = [shareSetting appSetting];
 _needLogoutAccount = [[defaultSettings valueForKeyPath:NeedLogoutAccounts] retain];
 ```
 
@@ -394,8 +394,8 @@ for(UITableViewCell* cell in cellArrays) {
 第一种情况子类需要继承的，在头文件中定义：
     
     ```
-    // QQTest.h
-    @interface QQTest : NSObject
+    // BWTest.h
+    @interface BWTest : NSObject
     {
         NSString* _name;
     }
@@ -403,13 +403,13 @@ for(UITableViewCell* cell in cellArrays) {
     
 第二种情况，不需要子类继承的，在实现文件中以Category的方式定义：
      ```
-    // QQTest.m
-    @interface QQTest ()
+    // BWTest.m
+    @interface BWTest ()
     {
         NSString* _name;
     }
     
-    @implementation QQTest
+    @implementation BWTest
     ...
     @end
     ```
@@ -418,11 +418,11 @@ for(UITableViewCell* cell in cellArrays) {
 ####使用委托模式，设置delegate的时候，在ARC下使用```weak```;在MRC下使用```retain```,并且在dealloc中将其指针置空。
 ####外部引用对象，外部不会发生set操作的对象，比如在创建界面元素的时候，使用readonly属性。
     ```
-    @interface QQView : UIView
+    @interface BWView : UIView
     @property (nonatomic, strong, readonly) UIView* backgoundView;
     @end
     
-    @implementation QQView
+    @implementation BWView
     @end
     ```
     
@@ -430,16 +430,16 @@ for(UITableViewCell* cell in cellArrays) {
 
 例如：
 ```
-//QQTest.h
-@class QQDataCenter;
-@interface QQTest : NSObject
-@property (nonatomic, strong) QQDataCenter* dataCenter;
+//BWTest.h
+@class BWDataCenter;
+@interface BWTest : NSObject
+@property (nonatomic, strong) BWDataCenter* dataCenter;
 @end
 
-//QQTest.m
+//BWTest.m
 
-#import "QQDataCenter.h"
-@implementation QQTest
+#import "BWDataCenter.h"
+@implementation BWTest
 @end
 ```
 
@@ -520,11 +520,11 @@ numFrame.size = CGSizeMake(cellWidth,cellHeight);
 良好的风格示例：
 
 ```
-@interface QQSettingCell : UITableViewCell
+@interface BWSettingCell : UITableViewCell
 @property (nonatomic, strong, readonly) UIImageView* rightAppendImageView;
 @end
 
-@implementation QQSettingCell
+@implementation BWSettingCell
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
